@@ -1,0 +1,6 @@
+tracking/config.php
+*.sqlite
+*.sqlite-*
+*.lock
+*.tar.gz
+tests/browser-*.png
