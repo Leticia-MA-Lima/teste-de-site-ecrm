@@ -34,3 +34,5 @@ As alterações são versionadas neste repositório. Credenciais não estão inc
 O GitHub Pages não executa PHP. O endereço do coletor passou a apontar explicitamente para o servidor de testes, com a origem `https://leticia-ma-lima.github.io` autorizada na configuração privada do coletor. A chave do CRM permanece somente no servidor. Ao importar para outro domínio, autorize a nova origem nessa configuração.
 
 O formulário trata respostas vazias/HTML e só confirma sucesso após `accepted: true`. Tentativas automáticas e manuais preservam o ID do envio. Testes em Chromium e WebKit cobrem recuperação após resposta HTML temporária, erro vazio e nova tentativa, além dos dois formulários.
+
+A publicação foi verificada no GitHub Pages. Um envio real no WebKit recebeu HTTP 200 e gerou o lead técnico `10x65761`, com 29 pontos e fila `synced`. O contato está identificado como teste e usa e-mail `example.invalid`. O teste dos dois formulários com respostas simuladas também passou na versão publicada.
