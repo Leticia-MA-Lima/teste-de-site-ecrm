@@ -120,6 +120,8 @@ function writeAndConfirm(array $c, string $operation, array $params, array $elem
 }
 
 function syncOne(PDO $db, array $c): bool {
+    // Integração antiga inativa por padrão. Analytics nunca cria/atualiza Leads.
+    if (empty($c['dry_run']) && empty($c['crm_sync_enabled'])) return false;
     // Um único worker por banco, inclusive entre cron e execução manual.
     $lock = fopen($c['database'] . '.lock', 'c');
     if (!$lock || !flock($lock, LOCK_EX | LOCK_NB)) return false;

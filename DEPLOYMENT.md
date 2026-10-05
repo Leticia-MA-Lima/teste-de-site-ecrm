@@ -1,5 +1,7 @@
 # Ambiente de testes — 01/10/2026
 
+**Estado atualizado em 05/10/2026:** agendamento `/etc/cron.d/ecrm-lead-test` removido para backup privado em `/var/tmp/ecrm-sync-disabled-20261005`, configuração `dry_run=true`, SQLite preservado. Não há sincronização automática com o CRM. O painel GA4 em `analytics/` ainda depende do servidor Kuma e da conta de serviço; as referências de sincronização abaixo são históricas.
+
 URL: https://tst.snet.app.plataformadecrm.com.br/lead-test/
 
 - Site e coletor: `/var/www/html/eCRM360/Snet/eCRM360evo/lead-test`.

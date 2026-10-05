@@ -4,3 +4,9 @@ tracking/config.php
 *.lock
 *.tar.gz
 tests/browser-*.png
+analytics/server/config.php
+analytics/**/service-account*.json
+analytics/**/oauth.json
+analytics/**/dashboard.json
+analytics/**/panel.htpasswd
+tests/analytics-*.png

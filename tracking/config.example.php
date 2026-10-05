@@ -13,6 +13,7 @@ return [
     'rating' => 'Ativo',
     'score_field' => null, // Nome de um campo numérico confirmado pelo describe da API.
     'dry_run' => true,
+    'crm_sync_enabled' => false, // Fluxo antigo desativado; não ativar no painel Analytics.
     'retention_days' => 30,
     'points' => ['visit' => 1, 'click' => 2, 'form_start' => 3, 'field_filled' => 1, 'form_submit' => 20],
 ];
