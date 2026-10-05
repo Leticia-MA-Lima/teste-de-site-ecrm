@@ -20,11 +20,28 @@
     const job = chain.then(async () => {
       for (let attempt = 0; attempt < 3; attempt++) {
         try {
-          const response = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), credentials: 'omit', keepalive: true, signal: AbortSignal.timeout(12000) });
-          const result = await response.json();
+          const controller = new AbortController();
+          const timeout = setTimeout(() => controller.abort(), 12000);
+          let response, result;
+          try {
+            response = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), credentials: 'omit', signal: controller.signal });
+            try { result = await response.json(); }
+            catch {
+              const error = new Error('O serviço de contato retornou uma resposta inválida. Tente novamente em instantes.');
+              error.userMessage = true;
+              error.permanent = response.status >= 400 && response.status < 500;
+              throw error;
+            }
+          } finally { clearTimeout(timeout); }
           if (!response.ok) {
             const error = new Error(result.error || 'Não foi possível registrar o envio.');
+            error.userMessage = true;
             error.permanent = response.status < 500;
+            throw error;
+          }
+          if (!result || result.accepted !== true) {
+            const error = new Error('O serviço de contato não confirmou o recebimento. Tente novamente.');
+            error.userMessage = true;
             throw error;
           }
           window.dispatchEvent(new CustomEvent('ecrm:tracked', { detail: { kind, target, ...result } }));
@@ -88,7 +105,7 @@
           link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = 'Continuar no WhatsApp';
           output.append(document.createElement('br'), link);
         }
-      } catch (error) { output.textContent = error.message || 'Não foi possível enviar. Tente novamente.'; }
+      } catch (error) { output.textContent = error.userMessage ? error.message : 'Não foi possível conectar ao serviço de contato. Confira sua conexão e tente novamente.'; }
       finally { delete form.dataset.sending; if (button) button.disabled = false; }
     });
   }

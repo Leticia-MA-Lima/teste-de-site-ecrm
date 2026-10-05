@@ -28,3 +28,9 @@ As tentativas anteriores à confirmação de permissões deixaram os registros t
 Clique em agenda não confirma reserva. O formulário da bolha registra o contato e oferece um link para WhatsApp; mensagem efetivamente enviada não é confirmada.
 
 As alterações são versionadas neste repositório. Credenciais não estão incluídas nos arquivos.
+
+## Correção do formulário — 05/10/2026
+
+O GitHub Pages não executa PHP. O endereço do coletor passou a apontar explicitamente para o servidor de testes, com a origem `https://leticia-ma-lima.github.io` autorizada na configuração privada do coletor. A chave do CRM permanece somente no servidor. Ao importar para outro domínio, autorize a nova origem nessa configuração.
+
+O formulário trata respostas vazias/HTML e só confirma sucesso após `accepted: true`. Tentativas automáticas e manuais preservam o ID do envio. Testes em Chromium e WebKit cobrem recuperação após resposta HTML temporária, erro vazio e nova tentativa, além dos dois formulários.

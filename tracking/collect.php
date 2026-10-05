@@ -13,9 +13,9 @@ try {
     header('Access-Control-Allow-Methods: POST, OPTIONS');
     header('Access-Control-Allow-Headers: Content-Type');
     if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') { http_response_code(204); exit; }
-    if ($_SERVER['REQUEST_METHOD'] !== 'POST') { http_response_code(405); header('Allow: POST, OPTIONS'); exit; }
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') { http_response_code(405); header('Allow: POST, OPTIONS'); echo '{"error":"Use POST para enviar o contato."}'; exit; }
     $raw = file_get_contents('php://input', false, null, 0, 16385);
-    if (strlen($raw) > 16384) { http_response_code(413); exit; }
+    if (strlen($raw) > 16384) { http_response_code(413); echo '{"error":"Os dados enviados excedem o limite permitido."}'; exit; }
     $input = json_decode($raw, true, 32, JSON_THROW_ON_ERROR);
     if (!is_array($input)) throw new InvalidArgumentException('JSON inválido');
     $db = database($c);
