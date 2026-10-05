@@ -1,3 +1,0 @@
-SHELL=/bin/bash
-PATH=/usr/local/bin:/usr/bin:/bin
-* * * * * analytics /usr/bin/php /opt/ecrm360-analytics/collector.php >/dev/null

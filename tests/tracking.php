@@ -14,6 +14,7 @@ function event(string $kind, string $target, array $extra = []): array {
 }
 function check(bool $ok, string $label): void { if (!$ok) throw new RuntimeException($label); echo "OK: $label\n"; }
 try {
+    check(!syncOne($db, ['dry_run' => false]), 'Integração CRM desativada por padrão');
     $r = collect($db, $c, event('visit', 'page')); check($r['score'] === 1 && !$r['qualified'], 'Visita anônima');
     $r = collect($db, $c, event('visit', 'outra-pagina')); check($r['score'] === 1 && $r['duplicate'], 'Visita repetida na mesma sessão');
     $r = collect($db, $c, event('click', 'schedule')); check($r['score'] === 3 && !$r['qualified'], 'Agendamento clicado não qualifica');

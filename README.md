@@ -1,6 +1,6 @@
 # Teste estático eCRM — rastreamento e integração central
 
-**Diretriz atual (05/10/2026):** o monitoramento é independente do CRM. O novo projeto está em [analytics/README.md](analytics/README.md): coleta GA4, cache privado e três telas para o Kuma. A sincronização do teste com o CRM foi desativada no servidor e o código exige habilitação explícita para qualquer retomada. As seções abaixo documentam o protótipo anterior; não seguir suas instruções de sincronização para instalar o painel.
+**Diretriz atual (05/10/2026):** o painel de monitoramento GA4 foi separado no repositório [ecrm360-analytics](https://github.com/Leticia-MA-Lima/ecrm360-analytics). Este repositório contém somente o site de teste e seu coletor. A sincronização com o CRM está desativada; não seguir as instruções históricas abaixo para reativá-la.
 
 O site estático usa `js/ecrm-tracking.js` para enviar eventos ao coletor PHP. A credencial do CRM fica exclusivamente no servidor. Contact Form 7 não é carregado nesta exportação: o envio é validado pelo navegador e pelo PHP, sem depender do WordPress original.
 
